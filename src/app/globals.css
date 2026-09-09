@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand palette */
+  --color-brand-teal: #00f2d4;
+  --color-brand-teal-hover: #00d2b4;
+  --color-brand-dark: #050a0a;
+  --color-brand-card: #081212;
+  --color-brand-card-2: #091414;
+  --color-brand-card-3: #070e0e;
+  --color-brand-section: #070d0d;
+  --color-brand-footer: #040808;
+
+  /* Typography */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-playfair: var(--font-playfair-display), Georgia, "Times New Roman", serif;
+
+  /* Custom animations */
+  --animate-pulse-dot: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* Neon glow effects */
+@utility glow-teal-sm {
+  box-shadow: 0 0 15px -3px rgb(0 242 212 / 0.25);
+}
+
+@utility glow-teal-md {
+  box-shadow: 0 0 25px 0 rgb(0 242 212 / 0.35);
+}
+
+@utility glow-border {
+  border: 1px solid rgb(0 242 212 / 0.18);
+}
+
+@utility text-glow-teal {
+  text-shadow: 0 0 20px rgb(0 242 212 / 0.4);
+}
+
+@utility radial-bg {
+  background: radial-gradient(
+    circle at 50% 20%,
+    rgb(0 242 212 / 0.08) 0%,
+    rgb(5 10 10 / 0) 70%
+  );
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    background-color: #050a0a;
+    color: #e2e8f0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    background-color: #00f2d4;
+    color: #000000;
+  }
+}
