@@ -27,3 +27,6 @@ Thumbs.db
 # TypeScript build cache
 *.tsbuildinfo
 
+# Local Admin UI (do not commit)
+/src/app/local-admin
+/src/app/api/local-admin
