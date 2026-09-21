@@ -17,6 +17,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://citydentalsiwan.com"),
   title:
     "City Dental and Face Hospital — Best Dental & Facial Hospital in Siwan Bihar | Dr. Vijay Kumar (BDS, MDS)",
   description:
@@ -90,12 +91,21 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
     siteName: "City Dental and Face Hospital",
+    images: [
+      {
+        url: "/upload/hero.jpg",
+        width: 1200,
+        height: 630,
+        alt: "City Dental and Face Hospital",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "City Dental and Face Hospital — Best Dental Clinic in Siwan Bihar",
     description:
       "Root Canal, Dental Implants, Braces, Smile Makeover & Facial Surgery in Siwan, Bihar. Dr. Vijay Kumar (BDS, MDS). Hospital Road, Siwan. Book via WhatsApp.",
+    images: ["/upload/hero.jpg"],
   },
   robots: {
     index: true,
