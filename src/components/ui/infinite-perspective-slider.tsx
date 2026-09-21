@@ -896,74 +896,68 @@ export default function InfinitePerspectiveSlider({
                   transform: "translateZ(1px)",
                 }}
               >
-                {/* Number & Badge */}
-                <div className="mb-2 flex items-center justify-between">
-                  <div
-                    ref={(element) => {
-                      numberRefs.current[index] = element;
-                    }}
-                    className="text-xl font-mono font-bold leading-none tracking-tight text-brand-teal opacity-0 max-md:text-base"
-                  >
-                    {number}
-                  </div>
-                  {badge && (
-                    <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-[10px] font-bold text-emerald-400 uppercase tracking-widest">
-                      {badge}
-                    </span>
-                  )}
-                </div>
-
-                {/* Image Container with uncropped full image & ambient backdrop */}
+                {/* Full Card Container */}
                 <div
                   ref={(element) => {
                     imageRefs.current[index] = element;
                   }}
-                  className="relative h-[34vh] min-h-[220px] w-full overflow-hidden rounded-2xl bg-slate-950 border border-teal-500/30 shadow-2xl transition-all duration-300 group-hover:border-teal-400/80 group-hover:shadow-[0_0_25px_rgba(20,184,166,0.25)]"
+                  className="relative h-full w-full overflow-hidden rounded-2xl bg-slate-950 border border-teal-500/30 shadow-2xl transition-all duration-500 group-hover:border-teal-400/80 group-hover:shadow-[0_0_30px_rgba(20,184,166,0.3)]"
                 >
-                  {/* Ambient blurred backdrop */}
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={src}
-                    alt=""
-                    aria-hidden="true"
-                    className="absolute inset-0 h-full w-full object-cover blur-xl opacity-30 scale-110 pointer-events-none"
-                    draggable={false}
-                  />
-
-                  {/* Crisp uncropped image */}
+                  {/* Image fills the FULL card */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={src}
                     alt={title || `slide-${index}`}
-                    className="relative z-10 h-full w-full object-contain p-2 pointer-events-none transition-transform duration-700 group-hover:scale-105"
+                    className="absolute inset-0 h-full w-full object-cover object-center pointer-events-none transition-transform duration-700 group-hover:scale-110"
                     draggable={false}
                   />
 
-                  {/* Tap hint overlay */}
-                  <div className="absolute top-2.5 right-2.5 z-20 flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/80 border border-teal-500/40 text-[10px] font-medium text-brand-teal backdrop-blur-md">
-                    <ZoomIn className="w-3 h-3 text-emerald-400" />
-                    <span>View</span>
-                  </div>
-                </div>
+                  {/* Top Overlay: Number, Badge, and Tap hint */}
+                  <div className="absolute top-3 inset-x-3 z-20 flex items-center justify-between pointer-events-none">
+                    <div
+                      ref={(element) => {
+                        numberRefs.current[index] = element;
+                      }}
+                      className="px-2.5 py-0.5 rounded-full bg-black/80 border border-teal-500/40 text-sm font-mono font-bold leading-none tracking-tight text-brand-teal opacity-0 backdrop-blur-md shadow-md"
+                    >
+                      {number}
+                    </div>
 
-                {/* Title and Description */}
-                <div className="mt-3 space-y-1">
-                  <div
-                    ref={(element) => {
-                      titleRefs.current[index] = element;
-                    }}
-                    className="text-base sm:text-lg font-playfair font-bold uppercase leading-tight tracking-[0.04em] text-white opacity-0 group-hover:text-brand-teal transition-colors"
-                  >
-                    {title}
+                    <div className="flex items-center gap-2">
+                      {badge && (
+                        <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-[10px] font-bold text-emerald-400 uppercase tracking-widest backdrop-blur-md shadow-md">
+                          {badge}
+                        </span>
+                      )}
+                      <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/80 border border-teal-500/40 text-[10px] font-medium text-brand-teal backdrop-blur-md shadow-md">
+                        <ZoomIn className="w-3 h-3 text-emerald-400" />
+                        <span>View</span>
+                      </div>
+                    </div>
                   </div>
 
-                  <div
-                    ref={(element) => {
-                      descriptionRefs.current[index] = element;
-                    }}
-                    className="text-xs text-slate-400 opacity-0 italic"
-                  >
-                    {desc || description || ""}
+                  {/* Gradient Overlay covering bottom half */}
+                  <div className="absolute inset-0 bg-linear-to-t from-black/95 via-black/40 to-transparent pointer-events-none z-10" />
+
+                  {/* Bottom Overlay: Title and Description */}
+                  <div className="absolute bottom-3.5 inset-x-3.5 z-20 space-y-1 pointer-events-none">
+                    <div
+                      ref={(element) => {
+                        titleRefs.current[index] = element;
+                      }}
+                      className="text-base sm:text-lg font-playfair font-bold uppercase leading-tight tracking-[0.04em] text-white opacity-0 group-hover:text-brand-teal transition-colors drop-shadow-md"
+                    >
+                      {title}
+                    </div>
+
+                    <div
+                      ref={(element) => {
+                        descriptionRefs.current[index] = element;
+                      }}
+                      className="text-xs text-slate-300 opacity-0 italic drop-shadow-sm"
+                    >
+                      {desc || description || ""}
+                    </div>
                   </div>
                 </div>
               </div>
