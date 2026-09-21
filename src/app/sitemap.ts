@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const rawBase =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://citydentalsiwan.com";
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.citydentalandface.com";
   const baseUrl = rawBase.replace(/\/$/, "");
 
   return [

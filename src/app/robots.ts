@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/local-admin", "/api/"],
       },
     ],
-    sitemap: "https://citydentalsiwan.com/sitemap.xml",
+    sitemap: "https://www.citydentalandface.com/sitemap.xml",
   };
 }

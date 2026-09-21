@@ -17,12 +17,12 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://citydentalsiwan.com"),
+  metadataBase: new URL("https://www.citydentalandface.com"),
   title: "City Dental & Face Hospital | Best Dentist in Siwan Bihar",
   description:
     "Best dental clinic & facial hospital in Siwan, Bihar. Led by Dr. Vijay Kumar (BDS, MDS). Expert root canal, dental implants, braces & facial surgery. Book on WhatsApp.",
   alternates: {
-    canonical: "https://citydentalsiwan.com",
+    canonical: "https://www.citydentalandface.com",
   },
   keywords: [
     // Brand
@@ -81,7 +81,7 @@ export const metadata: Metadata = {
     "affordable dental clinic siwan",
     "low cost dental treatment siwan",
   ],
-  authors: [{ name: "Dr. Vijay Kumar", url: "https://citydentalsiwan.com" }],
+  authors: [{ name: "Dr. Vijay Kumar", url: "https://www.citydentalandface.com" }],
   creator: "City Dental and Face Hospital",
   publisher: "City Dental and Face Hospital",
   category: "health",
@@ -89,7 +89,7 @@ export const metadata: Metadata = {
     title: "City Dental & Face Hospital | Best Dentist in Siwan Bihar",
     description:
       "Best dental and facial hospital in Siwan, Bihar. Led by Dr. Vijay Kumar (BDS, MDS). Root Canal, Implants, Braces, Smile Makeover, Facial Surgery. 5-Star Rated. Hospital Road, Siwan.",
-    url: "https://citydentalsiwan.com",
+    url: "https://www.citydentalandface.com",
     type: "website",
     locale: "en_IN",
     siteName: "City Dental and Face Hospital",
@@ -130,10 +130,10 @@ const jsonLd = {
   alternateName: "CDF Hospital Siwan",
   description:
     "Best dental and facial hospital in Siwan, Bihar. Led by Dr. Vijay Kumar (BDS, MDS). Specializing in Root Canal Treatment, Dental Implants, Braces, Smile Makeover, Teeth Whitening, Painless Dentistry, Facial Surgery and Maxillofacial Surgery.",
-  url: "https://citydentalsiwan.com",
+  url: "https://www.citydentalandface.com",
   telephone: "+91 98352 75256",
   priceRange: "₹₹",
-  image: "https://citydentalsiwan.com/upload/hero.jpg",
+  image: "https://www.citydentalandface.com/upload/hero.jpg",
   address: {
     "@type": "PostalAddress",
     streetAddress: "Infront of Adda No-3, Hospital Road, Naya Bazar",
