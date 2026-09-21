@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source "./local-admin/page.tsx";
 
 @theme {
   /* Brand palette */

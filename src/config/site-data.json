@@ -67,8 +67,8 @@
     {
       "id": "neha-kumari",
       "visible": true,
-      "name": "Dr. Neha Kumari",
-      "degrees": "B.D.S., M.D.S.",
+      "name": "Dr. Kavita Sharma",
+      "degrees": "B.D.S.",
       "role": "Consultant Dental Surgeon & Endodontist",
       "tagline": "Root Canal & Aesthetic Specialist",
       "image": "/upload/doctor2.jpg",
@@ -89,8 +89,8 @@
           "text": "Aesthetic & Orthodontic Care"
         }
       ],
-      "whatsappNote": "Consultation with Dr. Neha Kumari (RCT & Aesthetic Care)",
-      "shortLabel": "Dr. Neha Kumari (Consultant Endodontist)"
+      "whatsappNote": "Consultation with Dr. Kavita Sharma (RCT & Aesthetic Care)",
+      "shortLabel": "Dr. Kavita Sharma (Consultant Endodontist)"
     }
   ],
   "HERO": {
@@ -246,6 +246,44 @@
       "label": "Google Verified Reviewer",
       "initials": "RK",
       "time": "Verified Patient"
+    }
+  ],
+  "TRANSFORMATIONS": [
+    {
+      "label": "Full Porcelain Veneers",
+      "duration": "2 Weeks",
+      "beforeImage": "/upload/treatment1.jpg",
+      "afterImage": "/upload/treatment1.jpg"
+    },
+    {
+      "label": "Invisalign Clear Aligners",
+      "duration": "6 Months",
+      "beforeImage": "/upload/treatment2.jpg",
+      "afterImage": "/upload/treatment2.jpg"
+    },
+    {
+      "label": "Laser In-Office Whitening",
+      "duration": "1 Session",
+      "beforeImage": "/upload/treatment3.jpg",
+      "afterImage": "/upload/treatment3.jpg"
+    },
+    {
+      "label": "Smile Makeover Design",
+      "duration": "3 Weeks",
+      "beforeImage": "/upload/treatment4.jpg",
+      "afterImage": "/upload/treatment4.jpg"
+    },
+    {
+      "label": "Ceramic Veneer Placement",
+      "duration": "2 Visits",
+      "beforeImage": "/upload/treatment5.jpg",
+      "afterImage": "/upload/treatment5.jpg"
+    },
+    {
+      "label": "Teeth Bonding & Contouring",
+      "duration": "1 Session",
+      "beforeImage": "/upload/treatment6.jpg",
+      "afterImage": "/upload/treatment6.jpg"
     }
   ],
   "SEO": {

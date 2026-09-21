@@ -69,6 +69,11 @@ export const ABOUT = siteData.ABOUT;
 export const TREATMENTS_CONFIG = siteData.TREATMENTS_CONFIG;
 
 // ─────────────────────────────────────────────
+// 8.5 TRANSFORMATIONS — Before & after images
+// ─────────────────────────────────────────────
+export const TRANSFORMATIONS = siteData.TRANSFORMATIONS;
+
+// ─────────────────────────────────────────────
 // 9. APPOINTMENT — Booking form content
 // ─────────────────────────────────────────────
 export const APPOINTMENT = siteData.APPOINTMENT;
