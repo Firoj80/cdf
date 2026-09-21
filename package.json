@@ -10,10 +10,14 @@
     "sync-images": "powershell -Command \"Copy-Item -Path 'upload/*' -Destination 'public/upload/' -Recurse -Force\""
   },
   "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "lucide-react": "^1.41.0",
+    "motion": "^13.4.0",
     "next": "16.2.6",
     "react": "19.2.6",
-    "react-dom": "19.2.6"
+    "react-dom": "19.2.6",
+    "tailwind-merge": "^3.7.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "4.1.17",

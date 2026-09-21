@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import { ChevronsLeftRight } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import { Component as ImageAutoSlider } from "./ui/image-auto-slider";
+import CarouselStacked, { type Slide } from "./ui/carousel-07";
 import { TRANSFORMATIONS } from "@/config/site.config";
 
 function BeforeAfterCard({
@@ -61,43 +61,14 @@ function BeforeAfterCard({
   );
 }
 
+const transformationSlides: Slide[] = TRANSFORMATIONS.map((item) => ({
+  image: item.afterImage || item.beforeImage,
+  title: item.label,
+  description: `Clinical transformation • Completed in ${item.duration}`,
+  badge: item.duration,
+}));
+
 export default function Transformations() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const handleScroll = useCallback(() => {
-    if (!scrollRef.current) return;
-    const container = scrollRef.current;
-    const scrollLeft = container.scrollLeft;
-    const children = Array.from(container.children) as HTMLElement[];
-    if (!children.length) return;
-
-    const containerCenter = scrollLeft + container.clientWidth / 2;
-    let closestIndex = 0;
-    let minDistance = Infinity;
-
-    children.forEach((child, index) => {
-      const childCenter = child.offsetLeft + child.offsetWidth / 2;
-      const distance = Math.abs(containerCenter - childCenter);
-      if (distance < minDistance) {
-        minDistance = distance;
-        closestIndex = index;
-      }
-    });
-
-    setActiveIndex(closestIndex);
-  }, []);
-
-  const scrollToSlide = (index: number) => {
-    if (!scrollRef.current) return;
-    const container = scrollRef.current;
-    const child = container.children[index] as HTMLElement;
-    if (child) {
-      const left = child.offsetLeft - (container.clientWidth - child.offsetWidth) / 2;
-      container.scrollTo({ left, behavior: "smooth" });
-    }
-  };
-
   return (
     <section
       id="transformations"
@@ -109,45 +80,10 @@ export default function Transformations() {
           title="Clinical Before & After Results"
         />
 
-        {/* Mobile View: Swipeable Carousel with pill-dot indicator and prompt */}
+        {/* Mobile View: 3D Stacked Swipeable Carousel */}
         <div className="block md:hidden">
-          <div
-            ref={scrollRef}
-            onScroll={handleScroll}
-            className="flex gap-4 overflow-x-auto snap-x snap-mandatory py-4 px-2 scroll-smooth"
-            style={{
-              scrollbarWidth: "none",
-              msOverflowStyle: "none",
-            }}
-          >
-            {TRANSFORMATIONS.map((item) => (
-              <div
-                key={item.label}
-                className="w-[85vw] max-w-[320px] shrink-0 snap-center transition-transform duration-300"
-              >
-                <BeforeAfterCard {...item} className="w-full" />
-              </div>
-            ))}
-          </div>
-
-          {/* Dots Indicator */}
-          <div className="flex items-center justify-center gap-1.5 mt-3">
-            {TRANSFORMATIONS.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => scrollToSlide(idx)}
-                className={`transition-all duration-300 h-2 rounded-full cursor-pointer ${
-                  activeIndex === idx
-                    ? "w-7 bg-emerald-400"
-                    : "w-2 bg-slate-700/80 hover:bg-slate-600"
-                }`}
-                aria-label={`Go to transformation ${idx + 1}`}
-              />
-            ))}
-          </div>
-
-          {/* Swipe or drag hint */}
-          <p className="text-center text-xs text-slate-400 mt-2 font-medium tracking-wide">
+          <CarouselStacked slides={transformationSlides} />
+          <p className="text-center text-xs text-slate-400 -mt-2 font-medium tracking-wide">
             Swipe or drag to explore
           </p>
         </div>
