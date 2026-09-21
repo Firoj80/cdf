@@ -237,14 +237,23 @@ const Card = ({ slide, index, total, progress, config }: CardProps) => {
         zIndex,
       }}
       className={cn(
-        "absolute rounded-2xl overflow-hidden bg-slate-900 group pointer-events-none",
-        "w-48 h-64 sm:w-56 sm:h-80 lg:w-64 lg:h-96 shadow-2xl border border-teal-500/20",
+        "absolute rounded-2xl overflow-hidden bg-slate-950 group pointer-events-none",
+        "w-64 h-56 sm:w-72 sm:h-64 lg:w-80 lg:h-72 shadow-2xl border border-teal-500/30",
       )}
     >
+      {/* Ambient blurred backdrop to eliminate harsh empty bars */}
+      <img
+        src={slide.image}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover blur-xl opacity-25 scale-110 pointer-events-none"
+      />
+
+      {/* Full uncropped image */}
       <img
         src={slide.image}
         alt={slide.title}
-        className="absolute inset-0 w-full h-full object-cover pointer-events-none transition-transform duration-700 group-hover:scale-110"
+        className="absolute inset-0 w-full h-full object-contain pointer-events-none transition-transform duration-700 group-hover:scale-105 z-10 p-2 pb-14"
       />
 
       <motion.div
@@ -255,21 +264,21 @@ const Card = ({ slide, index, total, progress, config }: CardProps) => {
             [0.5, 0.2, 0, 0.2, 0.5],
           ),
         }}
-        className="absolute inset-0 bg-black pointer-events-none"
+        className="absolute inset-0 bg-black/40 pointer-events-none z-20"
       />
 
-      <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent" />
+      <div className="absolute inset-0 bg-linear-to-t from-black/95 via-transparent to-black/30 pointer-events-none z-20" />
 
-      <Badge className="absolute top-3 right-3 sm:top-5 sm:right-5 lg:top-6 lg:right-6 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-black/75 border border-teal-500/40 backdrop-blur-md text-[10px] sm:text-xs font-bold uppercase tracking-widest text-emerald-400">
+      <Badge className="absolute top-2.5 right-2.5 sm:top-3.5 sm:right-3.5 z-30 px-2 sm:px-2.5 py-0.5 rounded-full bg-black/80 border border-teal-500/40 backdrop-blur-md text-[10px] sm:text-xs font-bold uppercase tracking-widest text-emerald-400">
         {slide.badge}
       </Badge>
 
-      <div className="absolute bottom-4 left-3 right-3 sm:bottom-8 sm:left-5 sm:right-5 lg:bottom-10 lg:left-6 lg:right-6 text-white text-center sm:text-left">
+      <div className="absolute bottom-2.5 left-3 right-3 sm:bottom-3.5 sm:left-4 sm:right-4 z-30 text-white text-center sm:text-left">
         <motion.p
           style={{
             opacity: useTransform(offset, [-0.5, 0, 0.5], [0, 1, 0]),
           }}
-          className="text-sm sm:text-lg lg:text-xl font-bold leading-tight mb-0.5 sm:mb-1 drop-shadow-md text-white font-playfair"
+          className="text-xs sm:text-sm font-bold leading-tight drop-shadow-md text-white font-playfair truncate"
         >
           {slide.title}
         </motion.p>
@@ -277,7 +286,7 @@ const Card = ({ slide, index, total, progress, config }: CardProps) => {
           style={{
             opacity: useTransform(offset, [-0.5, 0, 0.5], [0, 1, 0]),
           }}
-          className="text-[11px] sm:text-xs text-slate-300 line-clamp-2 italic font-medium"
+          className="text-[10px] text-slate-300 truncate italic font-medium"
         >
           {slide.description}
         </motion.p>

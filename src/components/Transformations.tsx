@@ -18,13 +18,13 @@ function BeforeAfterCard({
     <div className={`rounded-xl overflow-hidden border border-teal-900/60 bg-brand-card-2 p-2.5 sm:p-3 shadow-xl ${className}`}>
       <div className="relative rounded-lg overflow-hidden flex items-center h-48 sm:h-52 bg-slate-900">
         {/* Before */}
-        <div className="w-1/2 h-full relative overflow-hidden border-r border-teal-400/40">
+        <div className="w-1/2 h-full relative overflow-hidden border-r border-teal-400/40 bg-slate-950">
           <Image
             src={beforeImage}
             alt={`${label} — before treatment`}
             fill
             sizes="(max-width: 768px) 50vw, 24vw"
-            className="object-cover"
+            className="object-contain p-1"
           />
           <span className="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/70 text-[10px] uppercase font-bold text-slate-300 z-10">
             Before
@@ -32,13 +32,13 @@ function BeforeAfterCard({
         </div>
 
         {/* After */}
-        <div className="w-1/2 h-full relative overflow-hidden">
+        <div className="w-1/2 h-full relative overflow-hidden bg-slate-950">
           <Image
             src={afterImage}
             alt={`${label} — after treatment`}
             fill
             sizes="(max-width: 768px) 50vw, 24vw"
-            className="object-cover"
+            className="object-contain p-1"
           />
           <span className="absolute top-2 right-2 px-2 py-0.5 rounded bg-brand-teal/20 border border-brand-teal/50 text-[10px] uppercase font-bold text-brand-teal z-10">
             After
