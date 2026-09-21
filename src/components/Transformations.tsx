@@ -3,90 +3,26 @@
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import {
-  ChevronsLeftRight,
   X,
   ChevronLeft,
   ChevronRight,
-  ZoomIn,
 } from "lucide-react";
 import SectionHeading from "./SectionHeading";
-import { Component as ImageAutoSlider } from "./ui/image-auto-slider";
-import CarouselStacked, { type Slide } from "./ui/carousel-07";
+import InfinitePerspectiveSlider, {
+  type InfinitePerspectiveSliderItemData,
+} from "./ui/infinite-perspective-slider";
 import { TRANSFORMATIONS } from "@/config/site.config";
 
-function BeforeAfterCard({
-  label,
-  duration,
-  beforeImage,
-  afterImage,
-  className = "",
-  onClick,
-}: (typeof TRANSFORMATIONS)[number] & {
-  className?: string;
-  onClick?: () => void;
-}) {
-  return (
-    <div
-      onClick={onClick}
-      className={`rounded-xl overflow-hidden border border-teal-900/60 bg-brand-card-2 p-2.5 sm:p-3 shadow-xl cursor-pointer hover:border-teal-400/80 transition-all duration-300 group ${className}`}
-    >
-      <div className="relative rounded-lg overflow-hidden flex items-center h-48 sm:h-52 bg-slate-900">
-        {/* Before */}
-        <div className="w-1/2 h-full relative overflow-hidden border-r border-teal-400/40 bg-slate-950">
-          <Image
-            src={beforeImage}
-            alt={`${label} — before treatment`}
-            fill
-            sizes="(max-width: 768px) 50vw, 24vw"
-            className="object-contain p-1"
-          />
-          <span className="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/70 text-[10px] uppercase font-bold text-slate-300 z-10">
-            Before
-          </span>
-        </div>
-
-        {/* After */}
-        <div className="w-1/2 h-full relative overflow-hidden bg-slate-950">
-          <Image
-            src={afterImage}
-            alt={`${label} — after treatment`}
-            fill
-            sizes="(max-width: 768px) 50vw, 24vw"
-            className="object-contain p-1"
-          />
-          <span className="absolute top-2 right-2 px-2 py-0.5 rounded bg-brand-teal/20 border border-brand-teal/50 text-[10px] uppercase font-bold text-brand-teal z-10">
-            After
-          </span>
-        </div>
-
-        {/* Slider handle */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-slate-900 border-2 border-brand-teal flex items-center justify-center text-brand-teal shadow-md pointer-events-none group-hover:scale-110 transition-transform">
-          <ChevronsLeftRight className="w-3.5 h-3.5" />
-        </div>
-
-        {/* Zoom hint overlay on hover */}
-        <div className="absolute bottom-2 right-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 px-2 py-0.5 rounded bg-black/80 border border-teal-500/40 text-[10px] text-emerald-400 backdrop-blur-xs">
-          <ZoomIn className="w-3 h-3" />
-          <span>View</span>
-        </div>
-      </div>
-
-      <div className="mt-3 px-2 flex justify-between items-center gap-3 text-xs">
-        <span className="text-slate-300 font-medium whitespace-nowrap group-hover:text-white transition-colors">
-          {label}
-        </span>
-        <span className="text-brand-teal whitespace-nowrap">{duration}</span>
-      </div>
-    </div>
-  );
-}
-
-const transformationSlides: Slide[] = TRANSFORMATIONS.map((item) => ({
-  image: item.afterImage || item.beforeImage,
-  title: item.label,
-  description: `Clinical transformation • Completed in ${item.duration}`,
-  badge: item.duration,
-}));
+const transformationSliderItems: InfinitePerspectiveSliderItemData[] =
+  TRANSFORMATIONS.map((item, index) => ({
+    number: `0${index + 1}`,
+    src: item.afterImage || item.beforeImage,
+    title: item.label,
+    desc: `Clinical transformation • Completed in ${item.duration}`,
+    badge: item.duration,
+    beforeImage: item.beforeImage,
+    afterImage: item.afterImage,
+  }));
 
 export default function Transformations() {
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
@@ -148,29 +84,17 @@ export default function Transformations() {
           title="Clinical Before & After Results"
         />
 
-        {/* Mobile View: 3D Stacked Swipeable Carousel */}
-        <div className="block md:hidden">
-          <CarouselStacked
-            slides={transformationSlides}
-            onSlideClick={(_, index) => setSelectedIdx(index)}
-          />
-          <p className="text-center text-xs text-slate-400 -mt-2 font-medium tracking-wide">
-            Swipe or drag to explore • Tap card to view full image
-          </p>
-        </div>
-
-        {/* Desktop View: Continuous Auto-scrolling Slider */}
-        <div className="hidden md:block">
-          <ImageAutoSlider
-            speed={60}
-            items={TRANSFORMATIONS.map((item, idx) => (
-              <BeforeAfterCard
-                key={item.label}
-                {...item}
-                onClick={() => setSelectedIdx(idx)}
-                className="w-[270px] xs:w-80 sm:w-96 shrink-0"
-              />
-            ))}
+        {/* 3D Infinite Perspective Slider for both Desktop and Mobile */}
+        <div className="w-full mt-4">
+          <InfinitePerspectiveSlider
+            images={transformationSliderItems}
+            cardWidth={320}
+            cardGap={24}
+            perspective={2200}
+            scrollSpeed={1}
+            scrollLerp={0.1}
+            maxRotation={80}
+            onItemClick={(_, index) => setSelectedIdx(index)}
           />
         </div>
       </div>
