@@ -11,6 +11,7 @@ import {
 } from "motion/react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import { ZoomIn } from "lucide-react";
 
 export interface Slide {
   image: string;
@@ -99,14 +100,17 @@ const getCarouselConfig = (width: number): CarouselConfig => {
 export interface CarouselStackedProps {
   slides?: Slide[];
   className?: string;
+  onSlideClick?: (slide: Slide, index: number) => void;
 }
 
 const CarouselStacked = ({
   slides = defaultSlides,
   className = "",
+  onSlideClick,
 }: CarouselStackedProps) => {
   const scrollProgress = useMotionValue(0);
   const startProgress = React.useRef(0);
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const [windowWidth, setWindowWidth] = React.useState(0);
 
   const total = slides.length;
@@ -157,7 +161,10 @@ const CarouselStacked = ({
         className,
       )}
     >
-      <div className="relative w-full max-w-7xl h-80 sm:h-112 lg:h-128 flex items-center justify-center">
+      <div
+        ref={containerRef}
+        className="relative w-full max-w-7xl h-80 sm:h-112 lg:h-128 flex items-center justify-center"
+      >
         {/* Transparent Drag Surface */}
         <motion.div
           drag="x"
@@ -168,6 +175,43 @@ const CarouselStacked = ({
             scrollProgress.set(scrollProgress.get() + delta);
           }}
           onDragEnd={handleDragEnd}
+          onTap={(_, info) => {
+            if (!containerRef.current) return;
+            const rect = containerRef.current.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const tapOffsetX = info.point.x - centerX;
+            const currentProgress = scrollProgress.get();
+            const activeIndex =
+              ((Math.round(currentProgress) % total) + total) % total;
+
+            // If tapped significantly right of center (> 70px)
+            if (tapOffsetX > config.xMultiplier * 0.7) {
+              const target = Math.round(currentProgress) + 1;
+              animate(scrollProgress, target, {
+                type: "spring",
+                stiffness: 200,
+                damping: 30,
+                mass: 1,
+              });
+              return;
+            }
+            // If tapped significantly left of center (< -70px)
+            if (tapOffsetX < -config.xMultiplier * 0.7) {
+              const target = Math.round(currentProgress) - 1;
+              animate(scrollProgress, target, {
+                type: "spring",
+                stiffness: 200,
+                damping: 30,
+                mass: 1,
+              });
+              return;
+            }
+
+            // Tapped center card -> open full image
+            if (onSlideClick) {
+              onSlideClick(slides[activeIndex], activeIndex);
+            }
+          }}
           className="absolute inset-0 z-50 cursor-grab active:cursor-grabbing"
         />
 
@@ -272,6 +316,17 @@ const Card = ({ slide, index, total, progress, config }: CardProps) => {
       <Badge className="absolute top-2.5 right-2.5 sm:top-3.5 sm:right-3.5 z-30 px-2 sm:px-2.5 py-0.5 rounded-full bg-black/80 border border-teal-500/40 backdrop-blur-md text-[10px] sm:text-xs font-bold uppercase tracking-widest text-emerald-400">
         {slide.badge}
       </Badge>
+
+      {/* Tap hint for active card */}
+      <motion.div
+        style={{
+          opacity: useTransform(offset, [-0.35, 0, 0.35], [0, 1, 0]),
+        }}
+        className="absolute top-2.5 left-2.5 z-30 flex items-center gap-1 px-2 py-0.5 rounded-full bg-black/80 border border-teal-500/40 text-[10px] font-medium text-brand-teal backdrop-blur-md shadow-md"
+      >
+        <ZoomIn className="w-3 h-3 text-emerald-400" />
+        <span>Tap to view</span>
+      </motion.div>
 
       <div className="absolute bottom-2.5 left-3 right-3 sm:bottom-3.5 sm:left-4 sm:right-4 z-30 text-white text-center sm:text-left">
         <motion.p
