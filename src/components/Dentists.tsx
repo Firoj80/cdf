@@ -42,12 +42,12 @@ export default function Dentists() {
               <div>
                 <div className="flex flex-col sm:flex-row gap-5 sm:gap-6 items-start">
                   {/* Doctor image */}
-                  <div className="relative w-full sm:w-48 h-52 sm:h-56 rounded-xl sm:rounded-2xl overflow-hidden shrink-0 border border-teal-500/30 bg-slate-900">
+                  <div className="relative w-full max-w-[340px] mx-auto sm:mx-0 sm:w-52 aspect-[3/4] rounded-xl sm:rounded-2xl overflow-hidden shrink-0 border border-teal-500/30 bg-slate-900 shadow-lg">
                     <Image
                       src={doctor.image}
                       alt={`${doctor.name} ${doctor.degrees} - City Dental & Face Hospital Siwan`}
                       fill
-                      sizes="(max-width: 640px) 100vw, 200px"
+                      sizes="(max-width: 640px) 100vw, 220px"
                       className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent" />
